@@ -78,7 +78,7 @@ class velcorr(object):
         d=self.datime.datespec
         return '%.3f %.3f %04d %02d %02d %02d'%(self.pos.j2000()[0],self.pos.j2000()[1],d.year,d.month,d.day,d.hour)
 
-def velcorr_web(curs,velcorr):
+def velcorr_web(velcorr):
     result='<p></p>'
     result+='<p><FORM ACTION="/velcorr" METHOD="POST">'
     result+='RA.xxx DEC.xxx YYYY MM DD HH [MM SS]: <input type="text" maxlength="30" size="30" value="%s" name="data" /><br/>'%velcorr

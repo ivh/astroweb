@@ -25,8 +25,7 @@ def handler(req):
     vc=velcorr()
     wanted=req.uri[1:]
     if wanted == 'velcorr': result=velcorr_web(form,vc)
-    else:                   result='Don\'t know what to do with %s'%req.u
-ri
+    else:                   result='Don\'t know what to do with %s'%req.uri
 
     conn.commit()
     conn.close()
