@@ -111,7 +111,7 @@ def check_data(data):
     if (out[3]<1) or (out[3]>12): return None
     try: 
 	if (out[4]<1) or (out[4]>31): return None
-        if (out[5]<0) or (out[4]>23): return None
+        if (out[5]<0) or (out[5]>23): return None
         if (out[6]<0) or (out[6]>59): return None
         if (out[7]<0) or (out[7]>59): return None
     except: pass
