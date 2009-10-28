@@ -5,6 +5,9 @@ the mod_python interface
 
 from mod_python import apache,util
 from os.path import join,exists
+import sys
+
+sys.path.append('/home/tom/py')
 
 from velcorr import velcorr,velcorr_web
 
@@ -16,19 +19,23 @@ def filecontent(filename,base=BASE):
     f.close()
     return content
 
+def startpage():
+    result='<p>'
+    result+='This is where I will put up a few astronomy tools.<br/>'
+    result+='Up to now, there is only '
+    result+='<a href="/velcorr/">velocity correction</a>.'
+    result+='</p>'
+    return result
+
 def handler(req):
     req.content_type = "text/html"
     form=util.FieldStorage(req)
 
     req.write(filecontent('head'))
 
-    vc=velcorr()
-    wanted=req.uri[1:]
-    if wanted == 'velcorr': result=velcorr_web(form,vc)
-    else:                   result='Don\'t know what to do with %s'%req.uri
-
-    conn.commit()
-    conn.close()
+    if req.uri == '/velcorr/': result=velcorr_web(form)
+    elif req.uri == '/src/velcorr/': result='<pre>%s</pre>'%filecontent('velcorr.py').replace('<','&lt;').replace('>','&gt;')
+    else: result= startpage()
 
     req.write(result.encode('ascii','xmlcharrefreplace'))
 
