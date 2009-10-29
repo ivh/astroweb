@@ -7,7 +7,7 @@ Input format: RA.xxx DEC.xxx YYYY MM DD HH MM SS
 
 RA and DEC must be J2000. Date and time in UTC.
 If you get thrown back to the standard values instead of your input
-then you probably had erroneous input.
+then you probably had erroneous input like a non-existing date.
 
 The calculated values are corrections to measured velocites that stem
 from the the observers motion with respect to different reference
@@ -48,10 +48,12 @@ peryear = 360+rashift # the earth moves this much per year
 # equinox in 2000 (leap year) was on march 20, 7:35
 equinox2000 = 2000.2157863715865
 
+deftime=datetime(2000,12,15,12,0,0)
+
 class velcorr(object):
-    def __init__(self,ra=0,dec=0,year=2000,month=12,day=15,hour=12,min=0,sec=0):
+    def __init__(self,ra=0.0,dec=0.0,datime=deftime):
         self.pos=C.Position((ra,dec))
-        self.datime=C.AstroDate(datetime(*map(int,(year,month,day,hour,min,sec))))
+        self.datime=C.AstroDate(datime)
         self.fracyr=self.datime.year - equinox2000
         
         self.earthcorr()
@@ -94,7 +96,7 @@ class velcorr(object):
 	result+='</ul></p>'
 	return result
 
-def check_data(data):
+def prep_data(data):
     if not data: return None
     out=''
     for c in data:
@@ -105,21 +107,16 @@ def check_data(data):
         try: out[i]=float(o)
         except: out[i]=0.0
         if i >1: out[i]=int(o)
-    if (out[0]<0.0) or (out[0]>360.0): return None
-    if (out[1]<-90.0) or (out[1]>90.0): return None
-    if (out[2]<1000) or (out[2]>3000): return None
-    if (out[3]<1) or (out[3]>12): return None
+    if (out[0]<0.0) or (out[0]>360.0): out[0]=0.0
+    if (out[1]<-90.0) or (out[1]>90.0): out[1]=0.0
     try: 
-	if (out[4]<1) or (out[4]>31): return None
-        if (out[5]<0) or (out[5]>23): return None
-        if (out[6]<0) or (out[6]>59): return None
-        if (out[7]<0) or (out[7]>59): return None
-    except: pass
-    return out
+	dtime=datetime(*out[2:])
+    except:
+        dtime=deftime
+    return out[0],out[1],dtime
 
 def velcorr_web(form):
-    data=form.getfirst('data')
-    data=check_data(data)
+    data=prep_data(form.getfirst('data'))
     if not data: vc=velcorr()
     else: vc=velcorr(*data)
     result='<p></p>'
