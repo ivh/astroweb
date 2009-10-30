@@ -71,7 +71,6 @@ class velcorr(object):
         self.heliovel= vmax *\
             sin(radians(ra_ecl - earth_ra_ecl)) * \
             cos(radians(dec_ecl))
-        self.heliovel *= -1
         return self.heliovel
 
     def galacorr(self):
