@@ -43,7 +43,7 @@ dy = 86400.0       # in sec
 circ = 2*pi*au     # earth orbit circumference
 vmax = circ/yr     # earths real velocity: 29.78 km/s
 rashift = 50/3600. # sping point shifts 50" / year
-peryear = 360+rashift # the earth moves this much per year
+peryear = 360-rashift # the earth moves this much per year
 
 # equinox in 2000 (leap year) was on march 20, 7:35
 equinox2000 = 2000.2157863715865
