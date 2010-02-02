@@ -74,7 +74,7 @@ def hst2sdss(form):
     rid=prep_data(form.getfirst('data'))
     result='<p></p>'
     result+='<p><FORM ACTION="/hst2sdss/" METHOD="POST">'
-    result+='<input type="text" maxlength="15" size="15" value="%s" name="data" />&nbsp;'%vc
+    result+='<input type="text" maxlength="15" size="15" value="%s" name="data" />&nbsp;'%0
     result+='<INPUT TYPE="submit" VALUE="SEND" NAME="send"></p>'
     if not rid: result+=handle_rid(0)
     else: result+=handle_rid(rid)
