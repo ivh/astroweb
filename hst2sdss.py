@@ -61,13 +61,14 @@ def handle_rid(rid):
     if rid==0: return ''
     dom=download_or_read(rid)
     namepos=myparse(dom)
-
-    result='<h3>%s</h3>'%namepos[0]
+    result=''
     for po in namepos:
+       result+='<h3>%s</h3>'%namepos[0]
        url=sdss_url(*po)
        result+="""<iframe sr ="%s" width="100%" height="300">
   <p>Your browser does not support iframes.</p>
 </iframe>"""%url
+    return result
 
 
 def hst2sdss(form):
