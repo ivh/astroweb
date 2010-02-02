@@ -43,14 +43,13 @@ def myparse(dom):
         h,m,s=map(float,(h,m,s))
         ra=(h + (m/60.) + (s/3600.))*15
         d=pos.getElementsByTagName('DEC')[0].attributes['Degrees'].value
-        print d
         m=pos.getElementsByTagName('DEC')[0].attributes['Arcmin'].value
         s=pos.getElementsByTagName('DEC')[0].attributes['Arcsec'].value
         if d[0]=='-': neg=True; d=d[1:]
         else: neg=False
         d,m,s=map(float,(d,m,s))
         dec=d + (m/60.) + (s/3600.)
-        if neg: dec*=-1; print 'ha'
+        if neg: dec*=-1
         namepos.append((tname, ra, dec))
     return namepos
 
