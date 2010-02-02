@@ -25,8 +25,8 @@ def startpage():
     result='<p>'
     result+='This is where I will put up a few astronomy tools.<br/>'
     result+='Up to now, there is only '
-    result+='<a href="/velcorr/">velocity correction</a>.'
-    result+='<a href="/hst2sdss/">get SDSS matches from a HST proposal ID</a>.'
+    result+='<a href="/velcorr/">velocity correction</a> and '
+    result+='<a href="/hst2sdss/"> search for matches in SDSS from HST proposal targets</a>.'
     result+='</p>'
     return result
 

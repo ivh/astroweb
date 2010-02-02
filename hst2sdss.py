@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """
 
-Documentation:
+Documentation: None. Will not gently handle non-existing run-IDs.
 
 
 """
@@ -14,7 +14,7 @@ from string import join
 
 URLBASE='http://www.stsci.edu/observing/phase2-public/'
 TMP='/tmp/'
-SEARCH_RADIUS= 1.5 /60.  # in arcmin
+SEARCH_RADIUS= 2 /60.  # in arcmin
 
 def sdss_url(name,ra,dec):
    return  'http://cas.sdss.org/DR6/en/tools/search/x_radial.asp?ra=%.4f&dec=%.4f&radius=%.4f&format=html&entries=all'%(ra,dec,SEARCH_RADIUS)
