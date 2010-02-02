@@ -65,9 +65,9 @@ def handle_rid(rid):
     for po in namepos:
        result+='<h3>%s</h3>'%po[0]
        url=sdss_url(*po)
-       result+="""<iframe sr ="%s" width="100%" height="300">
+       result+="""<iframe src="%s" width="100%" height="300">
   <p>Your browser does not support iframes.</p>
-</iframe>"""%url
+</iframe>"""%(url,)
     return result
 
 
