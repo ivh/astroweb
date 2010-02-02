@@ -46,7 +46,8 @@ def myparse(dom):
         m=pos.getElementsByTagName('DEC')[0].attributes['Arcmin'].value
         s=pos.getElementsByTagName('DEC')[0].attributes['Arcsec'].value
         d,m,s=map(float,(d,m,s))
-        dec=d + (m/60.) + (s/3600.)
+        if d<0: dec=d - (m/60.) - (s/3600.)
+        else: dec=d + (m/60.) + (s/3600.)
         namepos.append((tname, ra, dec))
     return namepos
 
