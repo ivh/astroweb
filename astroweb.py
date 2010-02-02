@@ -11,6 +11,8 @@ sys.path.append('/home/tom/py')
 
 from velcorr import velcorr,velcorr_web
 
+from hst2sdss import hst2sdss
+
 BASE=join('/','home','tom','sites','astroweb')
 
 def filecontent(filename,base=BASE):
@@ -24,6 +26,7 @@ def startpage():
     result+='This is where I will put up a few astronomy tools.<br/>'
     result+='Up to now, there is only '
     result+='<a href="/velcorr/">velocity correction</a>.'
+    result+='<a href="/hst2sdss/">get SDSS matches from a HST proposal ID</a>.'
     result+='</p>'
     return result
 
@@ -35,6 +38,8 @@ def handler(req):
 
     if req.uri == '/velcorr/': result=velcorr_web(form)
     elif req.uri == '/src/velcorr/': result='<pre>%s</pre>'%filecontent('velcorr.py').replace('<','&lt;').replace('>','&gt;')
+    elif req.uri == '/hst2sdss/': result=hst2sdss(form)
+    
     else: result= startpage()
 
     req.write(result.encode('ascii','xmlcharrefreplace'))
